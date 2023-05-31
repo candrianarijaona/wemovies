@@ -6,10 +6,11 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class MovieDbService
 {
+    protected const LANGUAGE = 'fr';
 
     public function __construct(
-        protected string $apiTheMovieDbBaseUrl,
-        protected string $apiTheMovieDbKey,
+        protected string $apiTmdbBaseUrl,
+        protected string $apiTmdbToken,
         protected HttpClientInterface $httpClient
     )
     {
@@ -17,11 +18,21 @@ class MovieDbService
 
     public function getGenre()
     {
-        $endpoint = sprintf('%s/%s', $this->apiTheMovieDbBaseUrl, '/genre/movie/list?language=fr');
+        return $this->callApi('/genre/movie/list');
+    }
+
+    public function getList()
+    {
+        return $this->callApi('/discover/movie');
+    }
+
+    protected function callApi($endpoint)
+    {
+        $endpoint = sprintf('%s/%s?language=%s', $this->apiTmdbBaseUrl, $endpoint, self::LANGUAGE);
 
         $response = $this->httpClient->request('GET', $endpoint, [
             'headers' => [
-                'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYzZkNzczYjQ3NmY4MDVlMTg2NmYyMWQzMTE4NjQwOCIsInN1YiI6IjY0NzYyZDZlOTI0Y2U2MDExNmM2NjNlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pJdP_88Zvs9Qc-b5o74ZieBUfS3LbqVdR5YzmAHChDA',
+                'Authorization' => sprintf('Bearer %s', $this->apiTmdbToken),
                 'accept' => 'application/json',
             ]]);
 

@@ -4,9 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    api_the_movie_db_key: '%env(API_THE_MOVIE_DB_KEY)%'
-    api_the_movie_db_base_url: 'https://api.themoviedb.org/3'
-
+    api_tmdb_base_url: 'https://api.themoviedb.org/3'
+    api_tmdb_token: '%env(API_TMDB_TOKEN)%'
 
 services:
     # default configuration for services in *this* file
@@ -24,7 +23,7 @@ services:
             - '../src/Kernel.php'
     App\Service\MovieDbService:
         arguments:
-            $apiTheMovieDbBaseUrl: "%api_the_movie_db_base_url%"
-            $apiTheMovieDbKey: "%api_the_movie_db_key%"
+            $apiTmdbBaseUrl: "%api_tmdb_base_url%"
+            $apiTmdbToken: "%api_tmdb_token%"
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
