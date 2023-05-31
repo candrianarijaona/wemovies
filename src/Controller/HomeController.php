@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Service\MovieDbService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -16,11 +15,8 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_home')]
-    public function index(): JsonResponse
+    public function index()
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/MovieDbController.php',
-        ]);
+        return $this->render('home/index.html.twig', []);
     }
 }
