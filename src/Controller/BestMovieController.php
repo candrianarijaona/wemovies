@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\TmdbApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 class BestMovieController extends AbstractController
 {
@@ -11,7 +12,7 @@ class BestMovieController extends AbstractController
     {
     }
 
-    public function index()
+    public function index(): Response
     {
         $video = null;
         if ($bestMovie = $this->tmdbApiService->getFirstTopRated()) {
