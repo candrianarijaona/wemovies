@@ -34,3 +34,7 @@ npm install
 npm run dev
 ```
 
+## Url 
+To preview the project:
+[http://localhost:7500/](http://localhost:7500/)
+

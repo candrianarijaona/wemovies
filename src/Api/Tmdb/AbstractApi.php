@@ -15,4 +15,14 @@ class AbstractApi implements ApiInterface
     {
         return [];
     }
+
+    public function get(string $endpoint, array $parameters = []) : array
+    {
+        return $this->request('GET', $endpoint, $parameters);
+    }
+
+    public function post(string $endpoint, array $parameters = []) : array
+    {
+        return $this->request('POST', $endpoint, $parameters);
+    }
 }
