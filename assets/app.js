@@ -12,6 +12,6 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
-import './genre';
-
-
+import './js/genre';
+import './js/modal';
+import './js/movie';

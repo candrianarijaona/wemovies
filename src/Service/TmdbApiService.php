@@ -26,6 +26,24 @@ class TmdbApiService
         return $this->callApi('/discover/movie', $parameters);
     }
 
+    public function getTopRated()
+    {
+        return $this->callApi('/movie/top_rated', ['page' => 1]);
+    }
+
+    public function getFirstTopRated()
+    {
+        $movies = $this->getTopRated();
+        return $movies['results'][0] ?? null;
+    }
+
+    public function getVideo($movieId)
+    {
+        $videos = $this->callApi(sprintf('movie/%s/videos', $movieId));
+
+        return $videos['results'][0] ?? null;
+    }
+
     protected function callApi(string $endpoint, array $parameters = [])
     {
         $endpoint = sprintf('%s/%s?language=%s', $this->apiTmdbBaseUrl, $endpoint, self::LANGUAGE);

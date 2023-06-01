@@ -1,19 +1,23 @@
+{% if bestMovie|length %}
 <div class="section_best relative mt-6">
+    {% if video %}
     <div class="video-player">
-        <video src="{{ asset('build/images/mov_bbb.mp4') }}" class="w-full" class="video"></video>
-        <button class="play-btn absolute left-1/2 top-1/2"> <span></span></button>
+        <img src="{{ tmdb_images_original ~ bestMovie.backdrop_path }}" class="w-full" class="video">
+        <button class="play-btn absolute left-1/2 top-1/2" data-video="{{ video.key }}" data-target="#modal1"> <span></span></button>
     </div>
+    {% endif %}
     <div class="flex flex-row items-end absolute bottom-5 left-5">
         <div class="poster">
-            <img src="{{ asset('build/images/poster.jpg') }}" alt="" width="80px" height=110px>
+            <img src="{{ tmdb_images_w154 ~ bestMovie.poster_path }}" alt="">
         </div>
         <div class="desc ml-3">
             <p class="title font-semibold text-white">
-                Le Fondateur
+                {{ bestMovie.title }}
             </p>
             <p class="subtitle text-white">
-                Le Fondateur Bande-annonce VF
+                {{ video.name }}
             </p>
         </div>
     </div>
 </div>
+{% endif %}

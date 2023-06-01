@@ -15,6 +15,14 @@
         </div>
     {% endblock %}
     </body>
+    {% block modal %}
+        <div class="modal" role="alert" id="modal1">
+            <div class="modal_content">
+                <button class="close" modal-target="#modal1" role="button">X</button>
+                <div class="modal_body"></div>
+            </div>
+        </div>
+    {% endblock %}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}

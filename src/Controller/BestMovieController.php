@@ -13,8 +13,14 @@ class BestMovieController extends AbstractController
 
     public function index()
     {
+        $video = null;
+        if ($bestMovie = $this->tmdbApiService->getFirstTopRated()) {
+            $video = $this->tmdbApiService->getVideo($bestMovie['id']);
+        }
+
         return $this->render('movie/_best_movie.html.twig', [
-            'bestMovie' => $this->tmdbApiService->bestMovie(),
+            'bestMovie' => $bestMovie,
+            'video' => $video,
         ]);
     }
 }
