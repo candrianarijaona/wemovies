@@ -21,14 +21,19 @@
                         </div>
                     </div>
                     <div class="detail_producer text-gray-500 font-medium">
-                        {{ movie.release_date|date("Y") }} <span class="text-xs text-blue-700 font-normal">- Disney,Pixar</span>
+                        {{ movie.release_date|date("Y") }} <span class="text-xs text-blue-700 font-normal"></span>
                     </div>
 
                     <div class="detail_excerpt text-xs text-gray-500 font-normal">
                         {{ movie.overview|split(' ')|slice(0, 50)|join(' ') ~ '...' }}
                     </div>
                     <div class="cta flex justify-end mt-2">
-                        <a href="#"  modal-target="#modal1" class="show bg-blue-500 px-6 py-1 text-white rounded-full ">Lire le détails</a>
+                        <a
+                            href="#"
+                            data-target="#modal1"
+                            data-movie-id="{{ movie.id }}"
+                            class="readMore bg-blue-500 px-6 py-1 text-white rounded-full"
+                        >Lire le détails</a>
                     </div>
                 </div>
             </div>

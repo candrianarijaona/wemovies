@@ -26,6 +26,11 @@ class TmdbApiService
         return $this->callApi('/discover/movie', $parameters);
     }
 
+    public function getMovie($movieId)
+    {
+        return $this->callApi(sprintf('movie/%s', $movieId));
+    }
+
     public function getTopRated()
     {
         return $this->callApi('/movie/top_rated', ['page' => 1]);

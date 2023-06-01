@@ -15,4 +15,21 @@ document.addEventListener("DOMContentLoaded", () => {
             modal.classList.add("active");
         })
     })
+
+    document.querySelectorAll('.readMore').forEach(e => {
+        e.addEventListener("click", () => {
+            const modal =  document.querySelector(e.getAttribute("data-target"));
+
+
+            fetch('/movie/detail/' + e.getAttribute('data-movie-id'))
+                .then(response => response.json())
+                .then(json => {
+                    modal.querySelector('.modal_body').innerHTML = json.content;
+                    modal.classList.add("active");
+                })
+
+
+
+        })
+    })
 });
