@@ -1,7 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1 class="text-3xl font-bold underline">
-        Hello world!
-    </h1>
+{% block right_content %}
+    <div class="lists">
+        {% if results|length %}
+            {% for movie in results %}
+            <div class="list flex flex-row">
+                {% if  movie.poster_path %}
+                <div class="list_img basis-auto mr-8">
+                    <img src="{{ tmdb_images_w154 ~ movie.poster_path }}" alt="{{ movie.title }}">
+                </div>
+                {% endif %}
+                <div class="list-detail basis-3/4">
+                    <div class="detail_head flex flex-row items-center">
+                        <div class="name text-xl text-gray-500 font-semibold mr-3">{{ movie.title }}</div>
+                        <div class="rate flex flex-row items-center" data-controller="star" title="{{ movie.vote_average }}">
+                            <input data-star-target="average" type="hidden" value="{{ movie.vote_average }}">
+                        </div>
+                        <div class="notes text-sm text-gray-500">
+                            {{ movie.vote_count }} votes
+                        </div>
+                    </div>
+                    <div class="detail_producer text-gray-500 font-medium">
+                        {{ movie.release_date|date("Y") }} <span class="text-xs text-blue-700 font-normal">- Disney,Pixar</span>
+                    </div>
+
+                    <div class="detail_excerpt text-xs text-gray-500 font-normal">
+                        {{ movie.overview|split(' ')|slice(0, 50)|join(' ') ~ '...' }}
+                    </div>
+                    <div class="cta flex justify-end mt-2">
+                        <a href="#"  modal-target="#modal1" class="show bg-blue-500 px-6 py-1 text-white rounded-full ">Lire le détails</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}

@@ -4,7 +4,7 @@ namespace App\Service;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class MovieDbService
+class TmdbApiService
 {
     protected const LANGUAGE = 'fr';
 
@@ -21,12 +21,12 @@ class MovieDbService
         return $this->callApi('/genre/movie/list');
     }
 
-    public function getList()
+    public function getList($parameters = [])
     {
-        return $this->callApi('/discover/movie');
+        return $this->callApi('/discover/movie', $parameters);
     }
 
-    protected function callApi($endpoint)
+    protected function callApi(string $endpoint, array $parameters = [])
     {
         $endpoint = sprintf('%s/%s?language=%s', $this->apiTmdbBaseUrl, $endpoint, self::LANGUAGE);
 
@@ -34,7 +34,9 @@ class MovieDbService
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->apiTmdbToken),
                 'accept' => 'application/json',
-            ]]);
+            ],
+            'query' => $parameters
+        ]);
 
         return json_decode($response->getContent(), true);
     }

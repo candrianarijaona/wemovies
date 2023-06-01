@@ -6,6 +6,9 @@
 parameters:
     api_tmdb_base_url: 'https://api.themoviedb.org/3'
     api_tmdb_token: '%env(API_TMDB_TOKEN)%'
+    tmdb_images:
+        original: https://image.tmdb.org/t/p/original
+        img_w154: https://image.tmdb.org/t/p/w154
 
 services:
     # default configuration for services in *this* file
@@ -21,7 +24,7 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-    App\Service\MovieDbService:
+    App\Service\TmdbApiService:
         arguments:
             $apiTmdbBaseUrl: "%api_tmdb_base_url%"
             $apiTmdbToken: "%api_tmdb_token%"

@@ -1,0 +1,19 @@
+{% block aside %}
+    <div class="left basis-1/4">
+        <div class="filter relative px-8 py-4 border-2 border-solid border border-gray-600">
+            {% for genre in genres.genres  %}
+            <div class="mb-2">
+                <label class="inline-flex items-center">
+                    <input
+                        type="checkbox"
+                        name="genreId"
+                        value="{{ genre.id }}"
+                        {% if genre.id in selectedGenreIds %}checked="checked"{% endif %}
+                    />
+                    <span class="ml-2">{{ genre.name }}</span>
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
